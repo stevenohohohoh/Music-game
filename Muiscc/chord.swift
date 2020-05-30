@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-let pickerValue: Array = [ "a", "b", "c", "d", "e", "f", "g"]
+let pickerValue: Array = ["a", "b", "c", "d", "e", "f", "g"]
 
 struct chord: View {
     @Binding var status: Int
@@ -17,7 +17,7 @@ struct chord: View {
     @Binding var answer: Bool
     @Binding var coin: Int
     
-    @State private var pickerValue: Array = [ "a", "b", "c", "d", "e", "f", "g"]
+    @State private var pickerValue: Array = ["a", "b", "c", "d", "e", "f", "g"]
     
     
     @State private var oneS = true
@@ -151,14 +151,16 @@ struct chord: View {
                 .padding(3).scaleEffect(x: 1.1, y: 1.1, anchor: UnitPoint.center)
             }.alert(isPresented: $isAlert) { () -> Alert in
                 
-            Alert(title: Text("Purchase"), message: Text("Are you sure you want to purchase 10 coins"), primaryButton: .default(Text("yes"), action: {
+            Alert(title: Text("Purchase"), message: Text("Are you sure you want to purchase with 10 coins?"), primaryButton: .default(Text("Yes"), action: {
                 
                 if self.coin > 10{
                     GSAudio.sharedInstance.playSounds(soundFileNames: self.current, withDelay: 0.5)
                     self.coin -= 10
+                    UserDefaults.standard.set(self.coin, forKey: "coin")
+
                 }
     
-            }), secondaryButton: .default(Text("nah")))
+            }), secondaryButton: .default(Text("No")))
             }
             
             Button(action:{
@@ -167,6 +169,7 @@ struct chord: View {
                 if ans.containsSameElements(as: self.current){
                     self.answer = true
                     self.coin += 25
+                    UserDefaults.standard.set(self.coin, forKey: "coin")
                 }
                 else{
                     self.answer = false

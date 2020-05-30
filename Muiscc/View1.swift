@@ -97,12 +97,7 @@ struct View1: View{
             Button(action:{
                 self.change = true
                 self.gameCount += 1
-                if self.gameCount > 5{
-                    
-                    self.status = 2
-                    self.coin += self.point*10
-                    
-                }
+                
                 if self.pickerValue[self.selectedIndex] != self.currentV{
                     
                     self.answer = false
@@ -113,6 +108,15 @@ struct View1: View{
                 }else{
                     self.answer = true
                     self.point += 1
+                }
+                
+                if self.gameCount > 5{
+                    
+                    self.status = 2
+                    self.coin += self.point*10
+                    UserDefaults.standard.set(self.coin, forKey: "coin")
+
+                    
                 }
                 
             }){

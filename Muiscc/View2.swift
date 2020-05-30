@@ -22,7 +22,7 @@ struct View2: View{
             Button(action: {
                     self.status = 1
                     self.point = 0
-                self.gameCount = 1
+                    self.gameCount = 1
                 }) {
 
                 Text("Retry")

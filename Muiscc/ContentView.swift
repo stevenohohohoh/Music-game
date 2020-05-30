@@ -35,7 +35,7 @@ struct ContentView: View {
     @State private var cgameCount = 1
     @State private var ccurrentV: Array = randomItem(num: 3)
     @State private var index: Int = 0
-    @State private var coin = 100
+    @State private var coin = UserDefaults.standard.integer(forKey: "coin")
     let defaults = UserDefaults.standard
     
     var body: some View {
@@ -49,6 +49,7 @@ struct ContentView: View {
                     View2(status: $status, answer: $answer, gameCount: $gameCount, point: $point, coin: $coin).transition(AnyTransition.slide)
                     .animation(.default)
                 }else if status == 3{
+                    
                     Menu(status: $status, coin: $coin).transition(AnyTransition.slide)
                     .animation(.default)
                 }else if status == 4{
