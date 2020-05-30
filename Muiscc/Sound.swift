@@ -121,3 +121,7 @@ func initRoundsArray(roundsNumber: Int, playersArray: [String]) -> [String] {
     }
     return roundsArray
 }
+
+func store(coin: Int){
+    UserDefaults.standard.set(coin, forKey: "savedLevelNumber")
+}

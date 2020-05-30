@@ -12,6 +12,7 @@ struct View1: View{
     @Binding var answer: Bool
     @Binding var point: Int
     @Binding var gameCount: Int
+    @Binding var coin: Int
     @State var currentV: String
     
     var pickerValue: Array = ["a", "b", "c", "d", "e", "f", "g"]
@@ -33,7 +34,7 @@ struct View1: View{
                     .font(.system(size: 30))
                     .padding(.leading, 150.0)
                    
-            }.padding(20)
+            }.padding(20).offset(y: 13)
                 
             Button(action: {
                 if self.change{
@@ -96,6 +97,12 @@ struct View1: View{
             Button(action:{
                 self.change = true
                 self.gameCount += 1
+                if self.gameCount > 5{
+                    
+                    self.status = 2
+                    self.coin += self.point*10
+                    
+                }
                 if self.pickerValue[self.selectedIndex] != self.currentV{
                     
                     self.answer = false
@@ -107,11 +114,7 @@ struct View1: View{
                     self.answer = true
                     self.point += 1
                 }
-                if self.gameCount > 5{
-                    self.gameCount = 0
-
-                    self.status = 2
-                }
+                
             }){
                 Text("Submit")
                     .fontWeight(.semibold)
@@ -142,7 +145,14 @@ struct View1: View{
                     .foregroundColor(Color.red)
                     .font(.system(size: 25))
                 }
-            }.edgesIgnoringSafeArea(.all)
+            }.edgesIgnoringSafeArea(.all).offset(y: -10)
+            
+            HStack {
+                Image("icons8-coin-48")
+                Text("\(self.coin)")
+                    .font(.title)
+            }.offset(x: 120, y: -10)
+            
         }
     }
 }

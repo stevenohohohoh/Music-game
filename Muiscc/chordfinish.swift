@@ -13,14 +13,16 @@ struct chordfinish: View {
     @Binding var current: Array<String>
     @State var Index: Int
     @Binding var answer: Bool
+    @Binding var coin: Int
 
     
     var body: some View {
         VStack(spacing: 20){
             if answer{
-                Text("Nice")
+                Text("Nice!! +25 coins!")
                 .font(.system(size: 30))
                     .foregroundColor(Color.green)
+                
 
             }else{
                 Text("oops")

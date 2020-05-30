@@ -10,6 +10,7 @@ import SwiftUI
 
 struct Menu: View{
     @Binding var status: Int
+    @Binding var coin: Int
     
     var body: some View{
         
@@ -18,7 +19,7 @@ struct Menu: View{
             //‎232, 216, 152
             Ellipse()
                 .frame(width: 800, height: 700, alignment: .center)
-                .offset(x: 0, y: -350)
+                .offset(x: 0, y: -380)
                 .foregroundColor(Color.orange)
                 .opacity(0.8)
             
@@ -79,10 +80,20 @@ struct Menu: View{
                             .cornerRadius(40)
                             .padding(.horizontal, 20)
                         }.padding(20).scaleEffect(x: 1.18, y: 1.4, anchor: UnitPoint.center)
-            }.padding(190).offset(y: 200)
+                
+                HStack {
+                    Image("icons8-coin-48")
+                    Text("\(self.coin)")
+                        .font(.title)
+                }.offset(x: 120)
+                
+                
+                }.padding(190).offset(y: 180).frame(minWidth: 0, maxWidth: 750, minHeight: 0, maxHeight: 300, alignment: .center)
+
             
             
         }
+
     }
           
     

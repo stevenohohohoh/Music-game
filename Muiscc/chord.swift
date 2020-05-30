@@ -13,8 +13,9 @@ let pickerValue: Array = [ "a", "b", "c", "d", "e", "f", "g"]
 struct chord: View {
     @Binding var status: Int
     @Binding var current: Array<String>
-    @State var Index: Int
+    @Binding var Index: Int
     @Binding var answer: Bool
+    @Binding var coin: Int
     
     @State private var pickerValue: Array = [ "a", "b", "c", "d", "e", "f", "g"]
     
@@ -28,7 +29,7 @@ struct chord: View {
     @State private var threeS = true
     @State private var three = ""
     
-
+    @State private var isAlert = false
     
     var body: some View {
         
@@ -57,17 +58,17 @@ struct chord: View {
                         Text("")
                         .font(.system(size: 30))
                         .foregroundColor(Color.black)
-                        .padding(10)
+                        .padding(8)
                     }else{
                         Text("\(one)")
                         .font(.system(size: 30))
                         .foregroundColor(Color.black)
-                        .padding(10)
+                        .padding(8)
                     }
                 }.overlay(
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(Color.orange, lineWidth: 3)
-                        .frame(width: 90, height: 90, alignment: Alignment.center)
+                        .frame(width: 100, height: 90, alignment: Alignment.center)
                 ).padding(40)
                 
                 Button(action:{
@@ -78,17 +79,17 @@ struct chord: View {
                         Text("")
                         .font(.system(size: 30))
                         .foregroundColor(Color.black)
-                        .padding(10)
+                        .padding(8)
                     }else{
                         Text("\(two)")
                         .font(.system(size: 30))
                         .foregroundColor(Color.black)
-                        .padding(10)
+                        .padding(8)
                     }
                 }.overlay(
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(Color.orange, lineWidth: 3)
-                        .frame(width: 90, height: 90, alignment: Alignment.center)
+                        .frame(width: 100, height: 90, alignment: Alignment.center)
                 ).padding(40)
                 
                 Button(action:{
@@ -99,17 +100,17 @@ struct chord: View {
                         Text("")
                         .font(.system(size: 30))
                         .foregroundColor(Color.black)
-                        .padding(10)
+                        .padding(8)
                     }else{
                         Text("\(three)")
                         .font(.system(size: 30))
                         .foregroundColor(Color.black)
-                        .padding(10)
+                        .padding(8)
                     }
                 }.overlay(
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(Color.orange, lineWidth: 3)
-                        .frame(width: 90, height: 90, alignment: Alignment.center)
+                        .frame(width: 100, height: 90, alignment: Alignment.center)
                 ).padding(40)
                 
                 
@@ -121,8 +122,9 @@ struct chord: View {
             }){
                 HStack {
                     Image("icons8-music-record-60")
-                        .font(.title)
+                  
                     Text("Play Chord")
+                    .font(.system(size: 20))
                 }.frame(minWidth: 0, maxWidth: .infinity)
                 .padding()
                 .foregroundColor(.white)
@@ -132,14 +134,14 @@ struct chord: View {
                 .padding(3).scaleEffect(x: 1.1, y: 1.1, anchor: UnitPoint.center)
             }
             Button(action: {
-                 
-                GSAudio.sharedInstance.playSounds(soundFileNames: self.current, withDelay: 0.5)
+                self.isAlert = true
+                
                 
             }){
                 HStack {
                     Image("icons8-music-record-60")
-                        .font(.title)
-                    Text("Saperate")
+                    Text("Saperate -10 Coins")
+                        .font(.system(size: 20))
                 }.frame(minWidth: 0, maxWidth: .infinity)
                 .padding()
                 .foregroundColor(.white)
@@ -147,6 +149,16 @@ struct chord: View {
                 .cornerRadius(40)
                 .padding(.horizontal, 20)
                 .padding(3).scaleEffect(x: 1.1, y: 1.1, anchor: UnitPoint.center)
+            }.alert(isPresented: $isAlert) { () -> Alert in
+                
+            Alert(title: Text("Purchase"), message: Text("Are you sure you want to purchase 10 coins"), primaryButton: .default(Text("yes"), action: {
+                
+                if self.coin > 10{
+                    GSAudio.sharedInstance.playSounds(soundFileNames: self.current, withDelay: 0.5)
+                    self.coin -= 10
+                }
+    
+            }), secondaryButton: .default(Text("nah")))
             }
             
             Button(action:{
@@ -154,6 +166,7 @@ struct chord: View {
                 self.status = 5
                 if ans.containsSameElements(as: self.current){
                     self.answer = true
+                    self.coin += 25
                 }
                 else{
                     self.answer = false
@@ -163,6 +176,7 @@ struct chord: View {
                 self.one = ""
                 self.two = ""
                 self.three = ""
+                
             }){
                 Text("submit")
                 .frame(minWidth: 0, maxWidth: .infinity)
@@ -195,8 +209,16 @@ struct chord: View {
                     .foregroundColor(Color.red)
                     .font(.system(size: 25))
                 }
-                }.edgesIgnoringSafeArea(.all).padding(30)
-        }.edgesIgnoringSafeArea(.all).padding(30)
+            }.padding()
+            
+            HStack {
+                Image("icons8-coin-48")
+                Text("\(self.coin)")
+                    .font(.title)
+            }.offset(x: 120, y: -10)
+            
+            }.edgesIgnoringSafeArea(.all).padding(30).offset(y: 30)
+        
    
     }
 }

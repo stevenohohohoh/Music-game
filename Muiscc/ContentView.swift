@@ -35,21 +35,29 @@ struct ContentView: View {
     @State private var cgameCount = 1
     @State private var ccurrentV: Array = randomItem(num: 3)
     @State private var index: Int = 0
+    @State private var coin = 100
+    let defaults = UserDefaults.standard
     
     var body: some View {
         VStack{
                 if status == 1{
                     
-                    View1(status: $status, answer: $answer, point: $point, gameCount: $gameCount, currentV: currentV)
+                    View1(status: $status, answer: $answer, point: $point, gameCount: $gameCount, coin:$coin, currentV: currentV).transition(AnyTransition.slide)
+                    .animation(.default)
                     
                 }else if status == 2{
-                    View2(status: $status, answer: $answer, gameCount: $gameCount, point: $point)
+                    View2(status: $status, answer: $answer, gameCount: $gameCount, point: $point, coin: $coin).transition(AnyTransition.slide)
+                    .animation(.default)
                 }else if status == 3{
-                    Menu(status: $status)
+                    Menu(status: $status, coin: $coin).transition(AnyTransition.slide)
+                    .animation(.default)
                 }else if status == 4{
-                    chord(status: $status, current: $ccurrentV, Index: index, answer: $canswer)
+                    chord(status: $status, current: $ccurrentV, Index: $index, answer: $canswer, coin: $coin).transition(AnyTransition.slide)
+                    .animation(.default)
+
                 }else if status == 5{
-                    chordfinish(status: $status, current: $ccurrentV, Index: index, answer: $canswer)
+                    chordfinish(status: $status, current: $ccurrentV, Index: index, answer: $canswer, coin: $coin).transition(AnyTransition.slide)
+                    .animation(.default)
             }
 
         }
