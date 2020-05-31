@@ -29,14 +29,19 @@ struct ContentView: View {
     @State private var point = 0
     @State private var gameCount = 1
     @State private var currentV = "no"
+    //single key
     
     @State private var canswer = true
-    @State private var cpoint = 0
-    @State private var cgameCount = 1
     @State private var ccurrentV: Array = randomItem(num: 3)
     @State private var index: Int = 0
+    //chord
+    
+    @State private var sanswer = true
+    @State private var scurrent = rScale(num: 7)
+    
+    
     @State private var coin = UserDefaults.standard.integer(forKey: "coin")
-    let defaults = UserDefaults.standard
+    
     
     var body: some View {
         VStack{
@@ -58,6 +63,14 @@ struct ContentView: View {
 
                 }else if status == 5{
                     chordfinish(status: $status, current: $ccurrentV, Index: index, answer: $canswer, coin: $coin).transition(AnyTransition.slide)
+                    .animation(.default)
+                }else if status == 6{
+                    
+                    Scale(status: $status, Scurrent: $scurrent, Index: $index, answer: $sanswer, coin: $coin).transition(AnyTransition.slide)
+                    .animation(.default)
+                    
+                }else if status == 7{
+                    scalefinish(status: $status, Scurrent: $scurrent, Index: index, Sanswer: $sanswer, coin: $coin).transition(AnyTransition.slide)
                     .animation(.default)
             }
 

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-let pickerValue: Array = ["a", "b", "c", "d", "e", "f", "g"]
+
 
 struct chord: View {
     @Binding var status: Int
@@ -140,7 +140,7 @@ struct chord: View {
             }){
                 HStack {
                     Image("icons8-music-record-60")
-                    Text("Saperate -10 Coins")
+                    Text("Saperate - 10 Coins")
                         .font(.system(size: 20))
                 }.frame(minWidth: 0, maxWidth: .infinity)
                 .padding()
@@ -232,19 +232,9 @@ struct chord_Previews: PreviewProvider {
     }
 }
 
-func randomItem(num: Int) -> Array<String>
-{
-  var resultSet = Set<String>()
 
-  while resultSet.count < num{
-      let randomIndex = Int(arc4random_uniform(UInt32(pickerValue.count)))
-      resultSet.insert(pickerValue[randomIndex])
-  }
 
-  let resultArray = Array(resultSet)
 
-  return(resultArray)
-}
 
 extension Array where Element: Comparable {
     func containsSameElements(as other: [Element]) -> Bool {

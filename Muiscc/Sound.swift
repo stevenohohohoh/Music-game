@@ -109,19 +109,3 @@ class GSAudio: NSObject, AVAudioPlayerDelegate {
 
 }
 
-func initRoundsArray(roundsNumber: Int, playersArray: [String]) -> [String] {
-    var roundsArray:[String] = []
-    for i in 1...roundsNumber {
-        var playersArrayCoppy = playersArray
-        let player1Item = playersArrayCoppy.remove(at: Int.random(in: 0...(playersArrayCoppy.count - 1)))
-        let player2Item = playersArrayCoppy.remove(at: Int.random(in: 0...(playersArrayCoppy.count - 1)))
-
-        let round: String = "ROUND \(i): First player: \(player1Item), Second player: \(player2Item)"
-        roundsArray.append(round)
-    }
-    return roundsArray
-}
-
-func store(coin: Int){
-    UserDefaults.standard.set(coin, forKey: "savedLevelNumber")
-}

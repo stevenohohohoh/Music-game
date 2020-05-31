@@ -34,6 +34,7 @@ struct Menu: View{
             VStack{
                         Button(action: {
                             self.status = 1
+                            
                         }) {
                             HStack {
 
@@ -49,7 +50,7 @@ struct Menu: View{
                             .padding(.horizontal, 20)
                         }.padding(20).scaleEffect(x: 1.18, y: 1.4, anchor: UnitPoint.center)
                         Button(action: {
-                            self.status = 7
+                            self.status = 6
                         }) {
                             HStack {
 
