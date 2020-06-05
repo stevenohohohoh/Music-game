@@ -19,29 +19,36 @@ struct View2: View{
         
         VStack{
             
-            Button(action: {
-                    self.status = 1
-                    self.point = 0
-                    self.gameCount = 1
-                }) {
-
-                Text("Retry")
-                    .font(.system(size: 30))
-            }
+            
             
            Text("You got \(self.point) point, so \(self.point*10) coins")
             .font(.system(size: 30))
             .padding()
             .multilineTextAlignment(.center)
+            .foregroundColor(Color.orange)
             
-            Button(action: {
-                self.status = 3
-                self.point = 0
-                self.gameCount = 1
-               }){
-                   Text("Menu")
-                       .foregroundColor(Color.red)
-            }.padding()
+            HStack(spacing: 50) {
+                Button(action: {
+                    self.status = 3
+                    self.point = 0
+                    self.gameCount = 1
+                   }){
+                       Text("Menu")
+                           .foregroundColor(Color.red)
+                        .font(.system(size: 30))
+                }.padding()
+                
+                Button(action: {
+                        self.status = 1
+                        self.point = 0
+                        self.gameCount = 1
+                    }) {
+
+                    Text("Retry")
+                        .font(.system(size: 30))
+                }
+            }
+            
             
             
         }

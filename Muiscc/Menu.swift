@@ -33,7 +33,11 @@ struct Menu: View{
 
             VStack{
                         Button(action: {
+                            
+                            accel()
                             self.status = 1
+                            
+                            UserDefaults.standard.set(self.coin, forKey: "coin")
                             
                         }) {
                             HStack {
@@ -83,10 +87,19 @@ struct Menu: View{
                         }.padding(20).scaleEffect(x: 1.18, y: 1.4, anchor: UnitPoint.center)
                 
                 HStack {
-                    Image("icons8-coin-48")
-                    Text("\(self.coin)")
-                        .font(.title)
-                }.offset(x: 120)
+  
+                    HStack {
+                        Button(action: {self.status = 8}) {
+                            Image("icons8-help-50")
+                        }.offset(x: -160).foregroundColor(Color.orange)
+                       
+                       
+                                             
+                        Image("icons8-coin-48")
+                        Text("\(self.coin)")
+                            .font(.title)
+                    }.offset(x: 80)
+                }
                 
                 
                 }.padding(190).offset(y: 180).frame(minWidth: 0, maxWidth: 750, minHeight: 0, maxHeight: 300, alignment: .center)

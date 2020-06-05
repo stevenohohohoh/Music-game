@@ -102,12 +102,14 @@ struct View1: View{
                     
                     self.answer = false
                     self.showingAlert = true
+                    self.status = 10
                     
                 }else if self.currentV == "no"{
                     print("havent pressed")
                 }else{
                     self.answer = true
                     self.point += 1
+                    self.status = 9
                 }
                 
                 if self.gameCount > 5{
@@ -167,3 +169,4 @@ struct View1_Previews: PreviewProvider {
         ContentView()
     }
 }
+

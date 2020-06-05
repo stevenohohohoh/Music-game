@@ -42,10 +42,12 @@ struct Scale: View {
         VStack(spacing: 30){
             
 
-            TextField("lowercase or uppercase are fine", text: $user)
+            TextField("Your answer", text: $user)
 //                .disabled(entry > (characterLimit - 1))
                 .keyboardType(.alphabet)
                 .padding()
+                .disableAutocorrection(true)
+                .autocapitalization(.allCharacters)
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(Color.orange, lineWidth: 2)

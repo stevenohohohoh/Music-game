@@ -35,9 +35,6 @@ struct chord: View {
         
         VStack{
             
-            
-            
-            
             Picker(selection: $Index, label: Text("")) {
                                   ForEach(0 ..< pickerValue.count) {
                                     Text(self.pickerValue[$0])
@@ -154,7 +151,10 @@ struct chord: View {
             Alert(title: Text("Purchase"), message: Text("Are you sure you want to purchase with 10 coins?"), primaryButton: .default(Text("Yes"), action: {
                 
                 if self.coin > 10{
-                    GSAudio.sharedInstance.playSounds(soundFileNames: self.current, withDelay: 0.5)
+                    
+                    let sortedArray = self.current.sorted(by: <)
+                    
+                    GSAudio.sharedInstance.playSounds(soundFileNames: sortedArray, withDelay: 0.5)
                     self.coin -= 10
                     UserDefaults.standard.set(self.coin, forKey: "coin")
 
@@ -207,6 +207,7 @@ struct chord: View {
                 }
             Button(action: {
                 self.status = 3
+
             }){
                 Text("Menu")
                     .foregroundColor(Color.red)

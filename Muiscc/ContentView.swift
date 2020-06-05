@@ -72,6 +72,12 @@ struct ContentView: View {
                 }else if status == 7{
                     scalefinish(status: $status, Scurrent: $scurrent, Index: index, Sanswer: $sanswer, coin: $coin).transition(AnyTransition.slide)
                     .animation(.default)
+                }else if status == 8{
+                    instruction(status: $status)
+                }else if status == 9{
+                    Check(status: $status)
+                }else if status == 10{
+                    Wrong(status: $status)
             }
 
         }
